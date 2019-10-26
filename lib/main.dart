@@ -67,29 +67,30 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Container(
-              width: 200,
-              height: 200,
-              color: _acceptedColor,
-              child: DragTarget(
-                builder: (context, candidateData, rejectedData) {
-                  return Container(
-                    width: 100,
-                    height: 100,
-                    color: _acceptedColor,
-                  );
-                },
-                onAccept: (MaterialColor data) {
-                  setState(() {
-                    _acceptedColor = data;
-                  });
-                },
-                onLeave: (MaterialColor data) {
-                  setState(() {
-                    _acceptedColor = Colors.grey;
-                  });
-                },
-              ),
+            DragTarget(
+              builder: (context, candidateData, rejectedData) {
+                return Container(
+                  width: 200,
+                  height: 200,
+                  color: _acceptedColor,
+                );
+              },
+              onWillAccept: (MaterialColor data) {
+                debugPrint('onWillAccept()');
+                return true;
+              },
+              onAccept: (MaterialColor data) {
+                debugPrint('onAccept()');
+                setState(() {
+                  _acceptedColor = data;
+                });
+              },
+              onLeave: (MaterialColor data) {
+                debugPrint('onLeave()');
+                setState(() {
+                  _acceptedColor = Colors.grey;
+                });
+              },
             ),
           ],
         ),
