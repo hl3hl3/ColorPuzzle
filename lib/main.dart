@@ -47,10 +47,23 @@ class _HomePageState extends State<HomePage> {
                       data: Colors.orange),
                   SizedBox(height: 20, width: 20),
                   Draggable(
-                      child: ColorSquare(color: Colors.lightGreen),
-                      feedback: ColorSquare(color: Colors.lightGreen),
-                      childWhenDragging: ColorSquare(color: Colors.green),
-                      data: Colors.lightGreen),
+                    child: ColorSquare(color: Colors.lightGreen),
+                    feedback: ColorSquare(color: Colors.lightGreen),
+                    childWhenDragging: ColorSquare(color: Colors.green),
+                    data: Colors.lightGreen,
+                    onDragStarted: () {
+                      debugPrint('onDragStarted(), 開始拖動');
+                    },
+                    onDraggableCanceled: (Velocity velocity, Offset offset) {
+                      debugPrint('onDraggableCanceled(), 被放掉＋沒被接受');
+                    },
+                    onDragCompleted: () {
+                      debugPrint('onDragCompleted(), 被放掉＋接受');
+                    },
+                    onDragEnd: (DraggableDetails details) {
+                      debugPrint('onDragEnd(), 被放掉');
+                    },
+                  ),
                 ],
               ),
             ),
